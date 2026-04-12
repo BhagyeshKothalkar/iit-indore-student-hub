@@ -16,6 +16,94 @@ export const studentProfile = {
   avatar: "",
 };
 
+export const professorProfile = {
+  name: "Dr. Meera Nair",
+  employeeId: "FAC-CSE-017",
+  department: "Computer Science & Engineering",
+  designation: "Associate Professor",
+  email: "meera.nair@iiti.ac.in",
+  phone: "+91 99887 66554",
+  office: "CSE Block, Room 312",
+  specialization: "Machine Learning, AI Systems, Data Mining",
+};
+
+export const publicTimetable = [
+  { day: "Monday", slot: "08:30 - 10:00", title: "CS302 Computer Networks", venue: "LH-201" },
+  { day: "Monday", slot: "10:00 - 11:30", title: "CS301 Machine Learning", venue: "LH-105" },
+  { day: "Tuesday", slot: "14:00 - 15:30", title: "EE301 Digital Signal Processing", venue: "LH-301" },
+  { day: "Wednesday", slot: "10:00 - 11:30", title: "CS301 Machine Learning", venue: "LH-105" },
+  { day: "Thursday", slot: "16:00 - 17:00", title: "MA301 Probability & Statistics Tutorial", venue: "LH-110" },
+  { day: "Friday", slot: "10:00 - 13:00", title: "CS351 ML Lab", venue: "Lab Complex 2" },
+];
+
+export const notifications = [
+  { id: "n1", title: "Mid-semester evaluation window opens", category: "Academic", date: "09 Apr 2026", body: "Students can review course evaluation forms from the portal until 15 Apr 2026." },
+  { id: "n2", title: "Summer internship document verification", category: "Placement", date: "07 Apr 2026", body: "Upload offer letters and faculty approvals before the verification deadline." },
+  { id: "n3", title: "Research colloquium this Friday", category: "Research", date: "05 Apr 2026", body: "All PG and PhD scholars are encouraged to attend the departmental colloquium at 3 PM." },
+];
+
+export const professorCourses = [
+  {
+    id: "pc1",
+    code: "CS301",
+    name: "Machine Learning",
+    semester: "Spring 2026",
+    section: "A",
+    schedule: "Mon/Wed 10:00 - 11:30",
+    students: 58,
+    attendanceUploads: [
+      { name: "attendance-week-05.pdf", uploadedOn: "02 Apr 2026", status: "Verified" },
+      { name: "attendance-week-06.pdf", uploadedOn: "08 Apr 2026", status: "Pending Review" },
+    ],
+    markUploads: [
+      { name: "midsem-marks.xlsx", uploadedOn: "01 Apr 2026", status: "Published" },
+    ],
+  },
+  {
+    id: "pc2",
+    code: "CS401",
+    name: "Deep Learning",
+    semester: "Spring 2026",
+    section: "B",
+    schedule: "Tue/Thu 11:30 - 13:00",
+    students: 34,
+    attendanceUploads: [
+      { name: "attendance-week-04.pdf", uploadedOn: "31 Mar 2026", status: "Verified" },
+    ],
+    markUploads: [
+      { name: "quiz-1-grades.xlsx", uploadedOn: "06 Apr 2026", status: "Draft" },
+      { name: "assignment-2-grades.xlsx", uploadedOn: "08 Apr 2026", status: "Published" },
+    ],
+  },
+];
+
+export const researchStudents = [
+  {
+    id: "rs1",
+    name: "Neha Verma",
+    scholarId: "PHD-CSE-2023-04",
+    programme: "PhD",
+    email: "neha.verma@iiti.ac.in",
+    phone: "+91 98765 11001",
+    topic: "Robust Federated Learning for Edge Devices",
+    domain: "Distributed ML",
+    year: "3rd Year",
+    status: "Comprehensive exam completed",
+  },
+  {
+    id: "rs2",
+    name: "Rahul Menon",
+    scholarId: "MSR-CSE-2024-09",
+    programme: "MS (Research)",
+    email: "rahul.menon@iiti.ac.in",
+    phone: "+91 98765 11002",
+    topic: "Explainable Vision Models for Smart Campus Monitoring",
+    domain: "Computer Vision",
+    year: "2nd Year",
+    status: "Thesis proposal under review",
+  },
+];
+
 export interface Course {
   id: string;
   code: string;

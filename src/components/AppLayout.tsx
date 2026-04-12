@@ -1,10 +1,15 @@
 import { Outlet } from "react-router-dom";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "./AppSidebar";
-import { studentProfile } from "@/data/mockData";
 import { GraduationCap } from "lucide-react";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { useAuth } from "@/contexts/AuthContext";
+import { AppSidebar } from "./AppSidebar";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function AppLayout() {
+  const { user } = useAuth();
+
+  if (!user) return null;
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
@@ -16,13 +21,14 @@ export default function AppLayout() {
               <GraduationCap className="h-5 w-5 text-primary" />
               <span className="font-semibold text-sm text-foreground hidden sm:inline">Student Information System</span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <ThemeToggle />
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-medium leading-tight">{studentProfile.name}</p>
-                <p className="text-xs text-muted-foreground">{studentProfile.rollNo}</p>
+                <p className="text-sm font-medium leading-tight">{user.name}</p>
+                <p className="text-xs text-muted-foreground">{user.idValue}</p>
               </div>
               <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">
-                {studentProfile.name.split(" ").map(n => n[0]).join("")}
+                {user.name.split(" ").map((name) => name[0]).join("")}
               </div>
             </div>
           </header>

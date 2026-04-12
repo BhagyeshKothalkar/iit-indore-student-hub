@@ -1,23 +1,38 @@
 import { useState } from "react";
+import { GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { GraduationCap } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useAuth, UserRole } from "@/contexts/AuthContext";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [studentId, setStudentId] = useState("");
+  const { login } = useAuth();
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState<UserRole>("student");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    login(role);
     navigate("/dashboard");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted/40 px-4">
+    <div className="relative min-h-screen flex items-center justify-center bg-muted/40 px-4">
+      <div className="absolute right-4 top-4 z-10">
+        <ThemeToggle />
+      </div>
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="text-center space-y-4 pb-2">
           <div className="flex flex-col items-center gap-3">
@@ -31,18 +46,37 @@ export default function Login() {
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="studentId">Student ID</Label>
-              <Input id="studentId" placeholder="e.g. CSE2021045" value={studentId} onChange={e => setStudentId(e.target.value)} />
+              <Label htmlFor="role">Role</Label>
+              <Select value={role} onValueChange={(value: UserRole) => setRole(value)}>
+                <SelectTrigger id="role">
+                  <SelectValue placeholder="Select role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="student">Student</SelectItem>
+                  <SelectItem value="professor">Professor</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="userId">{role === "student" ? "Student ID" : "Employee ID"}</Label>
+              <Input
+                id="userId"
+                placeholder={role === "student" ? "e.g. CSE2021045" : "e.g. FAC-CSE-017"}
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} />
+              <Input id="password" type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <Button type="submit" className="w-full gap-2">
               <GraduationCap className="h-4 w-4" />
               Sign In
             </Button>
-            <p className="text-xs text-center text-muted-foreground">Use any credentials to proceed (demo mode)</p>
+            <p className="text-xs text-center text-muted-foreground">
+              Use any credentials to proceed in demo mode and switch roles with the dropdown.
+            </p>
           </form>
         </CardContent>
       </Card>

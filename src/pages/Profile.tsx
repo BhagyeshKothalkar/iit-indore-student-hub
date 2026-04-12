@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { studentProfile } from "@/data/mockData";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Field = ({ label, value }: { label: string; value: string | number }) => (
   <div>
@@ -10,23 +10,26 @@ const Field = ({ label, value }: { label: string; value: string | number }) => (
 );
 
 export default function Profile() {
-  const s = studentProfile;
+  const { user } = useAuth();
+
+  if (!user) return null;
+
   return (
     <div className="space-y-6 max-w-3xl">
-      <h1 className="text-2xl font-bold">Student Profile</h1>
+      <h1 className="text-2xl font-bold">{user.role === "student" ? "Student Profile" : "Professor Profile"}</h1>
 
       <Card>
         <CardContent className="p-6 flex flex-col sm:flex-row gap-6">
           <div className="h-24 w-24 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-3xl font-bold flex-shrink-0 mx-auto sm:mx-0">
-            {s.name.split(" ").map(n => n[0]).join("")}
+            {user.name.split(" ").map((name) => name[0]).join("")}
           </div>
           <div className="flex-1 space-y-1 text-center sm:text-left">
-            <h2 className="text-xl font-bold">{s.name}</h2>
-            <p className="text-sm text-muted-foreground">{s.rollNo}</p>
-            <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-2">
-              <Badge>{s.programme}</Badge>
-              <Badge variant="secondary">{s.department}</Badge>
-              <Badge variant="outline">Batch {s.batch}</Badge>
+            <h2 className="text-xl font-bold">{user.name}</h2>
+            <p className="text-sm text-muted-foreground">{user.idValue}</p>
+            <div className="mt-2 flex flex-wrap gap-2 justify-center sm:justify-start">
+              <Badge>{user.role === "student" ? user.programme : user.designation}</Badge>
+              <Badge variant="secondary">{user.department}</Badge>
+              <Badge variant="outline">{user.role === "student" ? `Batch ${user.batch}` : user.office}</Badge>
             </div>
           </div>
         </CardContent>
@@ -34,26 +37,54 @@ export default function Profile() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Card>
-          <CardHeader className="pb-3"><CardTitle className="text-base">Academic Info</CardTitle></CardHeader>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">{user.role === "student" ? "Academic Info" : "Professional Info"}</CardTitle>
+          </CardHeader>
           <CardContent className="grid grid-cols-2 gap-4">
-            <Field label="Programme" value={s.programme} />
-            <Field label="Department" value={s.department} />
-            <Field label="Semester" value={s.semester} />
-            <Field label="CGPA" value={s.cgpa} />
-            <Field label="Batch" value={s.batch} />
-            <Field label="Email" value={s.email} />
+            {user.role === "student" ? (
+              <>
+                <Field label="Programme" value={user.programme} />
+                <Field label="Department" value={user.department} />
+                <Field label="Semester" value={user.semester} />
+                <Field label="CGPA" value={user.cgpa} />
+                <Field label="Batch" value={user.batch} />
+                <Field label="Email" value={user.email} />
+              </>
+            ) : (
+              <>
+                <Field label="Designation" value={user.designation} />
+                <Field label="Department" value={user.department} />
+                <Field label="Employee ID" value={user.employeeId} />
+                <Field label="Office" value={user.office} />
+                <Field label="Specialization" value={user.specialization} />
+                <Field label="Email" value={user.email} />
+              </>
+            )}
           </CardContent>
         </Card>
 
         <Card>
-          <CardHeader className="pb-3"><CardTitle className="text-base">Personal Info</CardTitle></CardHeader>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">{user.role === "student" ? "Personal Info" : "Contact Info"}</CardTitle>
+          </CardHeader>
           <CardContent className="grid grid-cols-2 gap-4">
-            <Field label="Date of Birth" value={s.dob} />
-            <Field label="Blood Group" value={s.bloodGroup} />
-            <Field label="Phone" value={s.phone} />
-            <Field label="Guardian" value={s.guardian} />
-            <Field label="Guardian Phone" value={s.guardianPhone} />
-            <Field label="Address" value={s.address} />
+            {user.role === "student" ? (
+              <>
+                <Field label="Date of Birth" value={user.dob} />
+                <Field label="Blood Group" value={user.bloodGroup} />
+                <Field label="Phone" value={user.phone} />
+                <Field label="Guardian" value={user.guardian} />
+                <Field label="Guardian Phone" value={user.guardianPhone} />
+                <Field label="Address" value={user.address} />
+              </>
+            ) : (
+              <>
+                <Field label="Phone" value={user.phone} />
+                <Field label="Office" value={user.office} />
+                <Field label="Email" value={user.email} />
+                <Field label="Department" value={user.department} />
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

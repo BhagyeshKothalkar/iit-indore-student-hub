@@ -1,18 +1,24 @@
 import {
-  LayoutDashboard, User, BookOpen, ClipboardList, GraduationCap,
-  CalendarCheck, CreditCard, FileUp, LogOut, ScrollText
+  Bell, BookOpen, BookUser, CalendarCheck, CalendarDays,
+  ClipboardList, CreditCard, FileUp, LayoutDashboard, LogOut, ScrollText, User
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
   SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
   SidebarFooter, useSidebar,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/contexts/AuthContext";
 
-const navItems = [
+const publicNavItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
   { title: "Profile", url: "/profile", icon: User },
+  { title: "Timetable", url: "/timetable", icon: CalendarDays },
+  { title: "Notifications", url: "/notifications", icon: Bell },
+];
+
+const studentNavItems = [
   { title: "Course Registration", url: "/registration", icon: BookOpen },
   { title: "Results", url: "/results", icon: ClipboardList },
   { title: "Gradesheets", url: "/gradesheets", icon: ScrollText },
@@ -21,10 +27,23 @@ const navItems = [
   { title: "Documents", url: "/documents", icon: FileUp },
 ];
 
+const professorNavItems = [
+  { title: "Professor Courses", url: "/professor", icon: BookUser },
+];
+
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  if (!user) return null;
+
+  const navItems = [
+    ...publicNavItems,
+    ...(user.role === "student" ? studentNavItems : professorNavItems),
+  ];
 
   return (
     <Sidebar collapsible="icon">
@@ -34,7 +53,9 @@ export function AppSidebar() {
           {!collapsed && (
             <div className="min-w-0">
               <p className="text-sm font-bold text-sidebar-foreground leading-tight">IIT Indore</p>
-              <p className="text-[11px] text-sidebar-foreground/60">Student Portal</p>
+              <p className="text-[11px] text-sidebar-foreground/60">
+                {user.role === "student" ? "Student Portal" : "Faculty Portal"}
+              </p>
             </div>
           )}
         </div>
@@ -60,11 +81,14 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <NavLink to="/" activeClassName="">
-                <LogOut className="h-4 w-4" />
-                {!collapsed && <span>Logout</span>}
-              </NavLink>
+            <SidebarMenuButton
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
+            >
+              <LogOut className="h-4 w-4" />
+              {!collapsed && <span>Logout</span>}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
