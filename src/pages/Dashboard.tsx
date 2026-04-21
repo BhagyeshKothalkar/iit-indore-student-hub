@@ -31,7 +31,7 @@ const studentLinks = [
 ];
 
 const professorLinks = [
-  { title: "Professor Courses", url: "/professor", icon: BookUser, desc: "Manage courses and research students" },
+  { title: "Teaching", url: "/professor", icon: BookUser, desc: "Manage your courses and research students" },
 ];
 
 export default function Dashboard() {

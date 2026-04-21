@@ -28,7 +28,7 @@ const studentNavItems = [
 ];
 
 const professorNavItems = [
-  { title: "Professor Courses", url: "/professor", icon: BookUser },
+  { title: "Teaching", url: "/professor", icon: BookUser },
 ];
 
 export function AppSidebar() {
@@ -48,7 +48,7 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>
-        <div className="p-4 flex items-center gap-3 border-b border-sidebar-border">
+        <div className="p-4 flex items-center gap-3 bg-sidebar-accent/40">
           <img src="/logo.webp" alt="IIT Indore" className="h-10 w-10 object-contain flex-shrink-0" />
           {!collapsed && (
             <div className="min-w-0">
