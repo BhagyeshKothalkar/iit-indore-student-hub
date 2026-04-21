@@ -219,9 +219,26 @@ export const feeData = {
   ],
 };
 
-export const uploadedDocuments = [
-  { id: "1", name: "Aadhar Card.pdf", type: "ID Proof", uploadDate: "10 Aug 2021", status: "verified" as const, size: "1.2 MB" },
-  { id: "2", name: "12th Marksheet.pdf", type: "Academic", uploadDate: "10 Aug 2021", status: "verified" as const, size: "850 KB" },
-  { id: "3", name: "Passport Photo.jpg", type: "Photo", uploadDate: "12 Aug 2021", status: "verified" as const, size: "120 KB" },
-  { id: "4", name: "Income Certificate.pdf", type: "Financial", uploadDate: "05 Sep 2023", status: "pending" as const, size: "2.1 MB" },
+export type DocStatus = "verified" | "pending" | "missing";
+
+export interface RequiredDocument {
+  id: string;
+  name: string;          // Human-readable, no extension (e.g. "Aadhar Card")
+  format: string;        // Accepted format(s), e.g. "PDF", "JPG/PNG"
+  accept: string;        // <input accept="..."> value
+  category: string;
+  status: DocStatus;
+  uploadedFile?: string;
+  uploadDate?: string;
+  size?: string;
+}
+
+export const requiredDocuments: RequiredDocument[] = [
+  { id: "d1", name: "Aadhar Card",        format: "PDF",     accept: "application/pdf",       category: "ID Proof",  status: "verified", uploadedFile: "aadhar.pdf",       uploadDate: "10 Aug 2021", size: "1.2 MB" },
+  { id: "d2", name: "12th Marksheet",     format: "PDF",     accept: "application/pdf",       category: "Academic",  status: "verified", uploadedFile: "12th.pdf",         uploadDate: "10 Aug 2021", size: "850 KB" },
+  { id: "d3", name: "Passport Photo",     format: "JPG/PNG", accept: "image/jpeg,image/png",  category: "Photo",     status: "verified", uploadedFile: "photo.jpg",        uploadDate: "12 Aug 2021", size: "120 KB" },
+  { id: "d4", name: "Income Certificate", format: "PDF",     accept: "application/pdf",       category: "Financial", status: "pending",  uploadedFile: "income.pdf",       uploadDate: "05 Sep 2023", size: "2.1 MB" },
+  { id: "d5", name: "Caste Certificate",  format: "PDF",     accept: "application/pdf",       category: "ID Proof",  status: "missing" },
+  { id: "d6", name: "Medical Fitness Certificate", format: "PDF", accept: "application/pdf",  category: "Health",    status: "missing" },
+  { id: "d7", name: "Bank Passbook Copy", format: "PDF/JPG", accept: "application/pdf,image/jpeg,image/png", category: "Financial", status: "missing" },
 ];
