@@ -1,13 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Button } from "@/components/ui/button";
 import { feeData } from "@/data/mockData";
 import { CreditCard } from "lucide-react";
 
 export default function FeePayment() {
   const total = feeData.items.reduce((s, i) => s + i.amount, 0);
-  const paid = feeData.items.filter(i => i.status === "paid").reduce((s, i) => s + i.amount, 0);
+  const paid = feeData.items.filter((i) => i.status === "paid").reduce((s, i) => s + i.amount, 0);
   const pending = total - paid;
 
   return (
@@ -16,8 +16,8 @@ export default function FeePayment() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card><CardContent className="p-4 text-center"><p className="text-xs text-muted-foreground">Total Fee</p><p className="text-xl font-bold">₹{total.toLocaleString("en-IN")}</p></CardContent></Card>
-        <Card><CardContent className="p-4 text-center"><p className="text-xs text-muted-foreground">Paid</p><p className="text-xl font-bold text-green-600">₹{paid.toLocaleString("en-IN")}</p></CardContent></Card>
-        <Card><CardContent className="p-4 text-center"><p className="text-xs text-muted-foreground">Pending</p><p className="text-xl font-bold text-destructive">₹{pending.toLocaleString("en-IN")}</p></CardContent></Card>
+        <Card><CardContent className="p-4 text-center"><p className="text-xs text-muted-foreground">Paid</p><p className="text-xl font-bold text-[hsl(var(--status-green))]">₹{paid.toLocaleString("en-IN")}</p></CardContent></Card>
+        <Card><CardContent className="p-4 text-center"><p className="text-xs text-muted-foreground">Pending</p><p className="text-xl font-bold text-[hsl(var(--status-red))]">₹{pending.toLocaleString("en-IN")}</p></CardContent></Card>
       </div>
 
       <Card>
@@ -42,9 +42,9 @@ export default function FeePayment() {
                   <TableCell>{item.description}</TableCell>
                   <TableCell className="text-right font-mono">₹{item.amount.toLocaleString("en-IN")}</TableCell>
                   <TableCell>
-                    <Badge variant={item.status === "paid" ? "default" : "destructive"}>
-                      {item.status}
-                    </Badge>
+                    <StatusBadge tone={item.status === "paid" ? "green" : "red"}>
+                      {item.status === "paid" ? "Paid" : "Pending"}
+                    </StatusBadge>
                   </TableCell>
                 </TableRow>
               ))}
