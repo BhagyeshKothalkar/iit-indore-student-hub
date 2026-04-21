@@ -4,76 +4,103 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 215 25% 15%;
+    /* Light theme — clean parchment with institutional blue accents */
+    --background: 40 30% 97%;
+    --foreground: 215 28% 14%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 215 28% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 215 28% 14%;
 
-    --primary: 213 58% 41%;
+    --primary: 213 58% 38%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 30% 95%;
-    --secondary-foreground: 213 58% 41%;
+    --secondary: 213 30% 92%;
+    --secondary-foreground: 213 58% 28%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 15% 47%;
+    --muted: 40 20% 93%;
+    --muted-foreground: 215 14% 42%;
 
-    --accent: 210 30% 93%;
-    --accent-foreground: 213 58% 30%;
+    --accent: 213 40% 90%;
+    --accent-foreground: 213 58% 25%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 72% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 20% 90%;
-    --input: 214 20% 88%;
-    --ring: 213 58% 41%;
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 213 58% 38%;
 
     --radius: 0.5rem;
 
+    /* Status palette — strict R/G/Y/W, consistent across the app */
+    --status-green: 142 62% 38%;
+    --status-yellow: 42 92% 52%;
+    --status-red: 0 72% 48%;
+    --status-white: 0 0% 100%;
+    --status-fg-on-color: 0 0% 100%;
+    --status-fg-on-white: 215 28% 14%;
+
+    /* Sidebar — institutional deep blue (light mode) */
     --sidebar-background: 213 58% 18%;
-    --sidebar-foreground: 210 20% 92%;
+    --sidebar-foreground: 210 25% 94%;
     --sidebar-primary: 210 40% 80%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 213 50% 25%;
-    --sidebar-accent-foreground: 210 20% 95%;
-    --sidebar-border: 213 40% 28%;
-    --sidebar-ring: 213 58% 41%;
+    --sidebar-accent: 213 50% 26%;
+    --sidebar-accent-foreground: 210 25% 96%;
+    --sidebar-border: 213 50% 26%;
+    --sidebar-ring: 213 58% 50%;
   }
 
   .dark {
-    /* Blue-tinted neutrals so dark UI matches the institutional palette and logo */
-    --background: 222 32% 9%;
-    --foreground: 210 25% 96%;
-    --card: 222 28% 11%;
-    --card-foreground: 210 25% 96%;
-    --popover: 222 28% 11%;
-    --popover-foreground: 210 25% 96%;
-    --primary: 213 55% 52%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 216 22% 16%;
-    --secondary-foreground: 210 22% 92%;
-    --muted: 218 20% 15%;
-    --muted-foreground: 215 16% 58%;
-    --accent: 216 22% 17%;
-    --accent-foreground: 210 22% 94%;
-    --destructive: 0 62% 36%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 216 18% 18%;
-    --input: 216 18% 18%;
-    --ring: 213 55% 52%;
-    /* Sidebar stays in the same blue family as light mode for continuity with the logo */
-    --sidebar-background: 213 50% 13%;
-    --sidebar-foreground: 210 22% 94%;
-    --sidebar-primary: 213 55% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 213 42% 18%;
-    --sidebar-accent-foreground: 210 22% 96%;
-    --sidebar-border: 213 36% 20%;
-    --sidebar-ring: 213 55% 52%;
+    /* Dark theme — deep slate with comfortable warm-cool balance */
+    --background: 220 22% 9%;
+    --foreground: 40 20% 94%;
+
+    --card: 220 18% 12%;
+    --card-foreground: 40 20% 94%;
+
+    --popover: 220 18% 12%;
+    --popover-foreground: 40 20% 94%;
+
+    --primary: 213 65% 60%;
+    --primary-foreground: 220 25% 10%;
+
+    --secondary: 220 14% 18%;
+    --secondary-foreground: 40 20% 92%;
+
+    --muted: 220 14% 16%;
+    --muted-foreground: 220 10% 62%;
+
+    --accent: 220 14% 20%;
+    --accent-foreground: 40 20% 94%;
+
+    --destructive: 0 62% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 20%;
+    --input: 220 14% 22%;
+    --ring: 213 65% 60%;
+
+    /* Status palette — same brand colors, slightly adjusted for dark surfaces */
+    --status-green: 142 55% 45%;
+    --status-yellow: 42 90% 55%;
+    --status-red: 0 70% 55%;
+    --status-white: 0 0% 96%;
+    --status-fg-on-color: 220 25% 10%;
+    --status-fg-on-white: 215 28% 14%;
+
+    /* Sidebar — keep dark blue family but darker than light mode for true theme shift */
+    --sidebar-background: 220 30% 7%;
+    --sidebar-foreground: 210 22% 90%;
+    --sidebar-primary: 213 65% 60%;
+    --sidebar-primary-foreground: 220 25% 10%;
+    --sidebar-accent: 220 24% 14%;
+    --sidebar-accent-foreground: 40 20% 94%;
+    --sidebar-border: 220 24% 14%;
+    --sidebar-ring: 213 65% 60%;
   }
 }
 
@@ -81,8 +108,26 @@
   * {
     @apply border-border;
   }
+  html, body {
+    font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Faster sidebar animations — override default 200ms transitions */
+@layer utilities {
+  [data-sidebar],
+  [data-sidebar="sidebar"],
+  [data-mobile="true"],
+  .group\/sidebar-wrapper *[class*="transition-["],
+  .group\/sidebar-wrapper *[class*="duration-200"] {
+    transition-duration: 120ms !important;
   }
 }
 
